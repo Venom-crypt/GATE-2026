@@ -1,0 +1,284 @@
+# Engineering Mathematics - GATE 2026 Quick Reference
+
+## PROPOSITIONAL LOGIC TRUTH TABLE
+
+| p | q | ¬p | p∧q | p∨q | p⊕q | p→q | p↔q |
+|---|---|----|-----|-----|-----|-----|-----|
+| T | T | F  | T   | T   | F   | T   | T   |
+| T | F | F  | F   | T   | T   | F   | F   |
+| F | T | T  | F   | T   | T   | T   | F   |
+| F | F | T  | F   | F   | F   | T   | T   |
+
+**De Morgan's Laws:**
+- ¬(p ∧ q) = ¬p ∨ ¬q
+- ¬(p ∨ q) = ¬p ∧ ¬q
+
+---
+
+## SETS OPERATIONS
+
+**Union:** A ∪ B = {x | x ∈ A or x ∈ B}
+**Intersection:** A ∩ B = {x | x ∈ A and x ∈ B}
+**Complement:** A' = {x | x ∉ A}
+**Cardinality:** |A ∪ B| = |A| + |B| - |A ∩ B|
+
+---
+
+## FUNCTIONS
+
+**Types:**
+- **Injective:** f(a) = f(b) ⟹ a = b (one-to-one)
+- **Surjective:** For all b ∈ B, ∃a ∈ A: f(a) = b (onto)
+- **Bijective:** Both injective and surjective (one-to-one correspondence)
+
+**Inverse exists iff bijective**
+
+---
+
+## COMBINATORICS
+
+**Permutations:** P(n,r) = n!/(n-r)!
+**Combinations:** C(n,r) = n!/(r!(n-r)!)
+**Note:** C(n,r) = C(n, n-r) (symmetry)
+
+**Recurrence Relation Example:**
+```
+Fibonacci: F(n) = F(n-1) + F(n-2), F(0)=0, F(1)=1
+Closed form: F(n) = (φ^n - ψ^n)/√5 where φ=(1+√5)/2
+```
+
+---
+
+## GRAPH THEORY BASICS
+
+**Connected Graph:** Path exists between all vertex pairs
+**Complete Graph K_n:** All vertices connected to all others (n(n-1)/2 edges)
+**Bipartite:** Vertices in 2 disjoint sets, edges between sets only
+**Chromatic Number:** Minimum colors for proper coloring
+
+**Handshaking Lemma:** Σ degree(v) = 2|E|
+
+---
+
+## LINEAR ALGEBRA
+
+### Determinant (2×2)
+```
+det([a b]) = ad - bc
+    [c d]
+```
+
+### Determinant (3×3) - Rule of Sarrus
+```
+det([a b c])
+    [d e f] = aei + bfg + cdh - ceg - afh - bdi
+    [g h i]
+```
+
+### System of Linear Equations
+```
+Ax = b
+- Unique solution: rank(A) = rank(A|b) = n
+- Infinite solutions: rank(A) = rank(A|b) < n
+- No solution: rank(A) < rank(A|b)
+```
+
+### Eigenvalues and Eigenvectors
+```
+1. Solve: det(A - λI) = 0 (characteristic equation)
+2. For each λ: Solve (A - λI)v = 0
+3. Non-zero v is eigenvector
+```
+
+### Diagonalization
+```
+If A has n linearly independent eigenvectors:
+A = PDP^(-1)
+P = [v₁ v₂ ... vₙ] (eigenvectors as columns)
+D = diag(λ₁, λ₂, ..., λₙ) (eigenvalues on diagonal)
+```
+
+---
+
+## CALCULUS
+
+### Derivatives - Chain Rule
+```
+If y = f(u) and u = g(x):
+dy/dx = (dy/du)(du/dx) = f'(g(x))·g'(x)
+```
+
+### Derivatives - Product Rule
+```
+(uv)' = u'v + uv'
+```
+
+### Derivatives - Quotient Rule
+```
+(u/v)' = (u'v - uv')/v²
+```
+
+### Common Derivatives
+| f(x) | f'(x) |
+|------|-------|
+| x^n | nx^(n-1) |
+| e^x | e^x |
+| ln(x) | 1/x |
+| sin(x) | cos(x) |
+| cos(x) | -sin(x) |
+| tan(x) | sec²(x) |
+
+### Maxima and Minima
+```
+1. Find critical points: f'(x) = 0
+2. Second derivative test:
+   - f''(x) < 0: Local maximum
+   - f''(x) > 0: Local minimum
+   - f''(x) = 0: Inconclusive
+3. Check endpoints for absolute extrema
+```
+
+### Integration by Parts
+```
+∫u dv = uv - ∫v du
+```
+
+### Integration by Substitution
+```
+∫f(g(x))g'(x)dx = ∫f(u)du where u = g(x)
+```
+
+---
+
+## PROBABILITY DISTRIBUTIONS
+
+### Normal Distribution N(μ, σ²)
+```
+PDF: f(x) = (1/(σ√(2π))) exp(-(x-μ)²/(2σ²))
+Mean = μ
+Variance = σ²
+68-95-99.7 Rule: 68% within σ, 95% within 2σ, 99.7% within 3σ
+```
+
+### Binomial Distribution B(n, p)
+```
+PMF: P(X = k) = C(n,k) p^k (1-p)^(n-k)
+Mean = np
+Variance = np(1-p)
+```
+
+### Poisson Distribution
+```
+PMF: P(X = k) = (λ^k e^(-λ))/k!
+Mean = λ
+Variance = λ
+(Approximates Binomial when n large, p small, np = λ)
+```
+
+### Exponential Distribution
+```
+PDF: f(x) = λe^(-λx), x ≥ 0
+Mean = 1/λ
+Variance = 1/λ²
+Memoryless property: P(X > s+t | X > s) = P(X > t)
+```
+
+### Uniform Distribution U(a,b)
+```
+PDF: f(x) = 1/(b-a) for a ≤ x ≤ b
+Mean = (a+b)/2
+Variance = (b-a)²/12
+```
+
+---
+
+## STATISTICS
+
+**Mean:** μ = Σx_i/n
+**Variance:** σ² = Σ(x_i - μ)²/n (population) or (n-1) (sample)
+**Standard Deviation:** σ = √variance
+
+**Normal Distribution Parameters:**
+- μ = mean (location)
+- σ = standard deviation (spread)
+- σ² = variance
+
+---
+
+## CONDITIONAL PROBABILITY & BAYES
+
+**Conditional Probability:**
+```
+P(A|B) = P(A∩B)/P(B)
+```
+
+**Multiplication Rule:**
+```
+P(A∩B) = P(A|B)P(B) = P(B|A)P(A)
+```
+
+**Total Probability Law:**
+```
+P(B) = Σ P(B|A_i)P(A_i)
+```
+
+**Bayes' Theorem:**
+```
+P(A|B) = P(B|A)P(A) / P(B)
+```
+
+**Bayes with Total Probability:**
+```
+P(A_i|B) = P(B|A_i)P(A_i) / [Σ P(B|A_j)P(A_j)]
+```
+
+---
+
+## DISCRETE MATH - RELATIONS
+
+**Relation Properties:**
+- **Reflexive:** (a,a) for all a ∈ A
+- **Symmetric:** (a,b) ⟹ (b,a)
+- **Transitive:** (a,b) ∧ (b,c) ⟹ (a,c)
+- **Antisymmetric:** (a,b) ∧ (b,a) ⟹ a = b
+
+**Equivalence Relation:** Reflexive + Symmetric + Transitive
+**Partial Order:** Reflexive + Antisymmetric + Transitive
+
+---
+
+## GROUPS AND MONOIDS
+
+**Monoid:** Set with associative binary operation and identity element
+**Group:** Monoid where every element has inverse
+**Abelian Group:** Group with commutative operation
+**Cyclic Group:** Generated by single element
+
+**Order of element g:** Smallest n where g^n = e (identity)
+
+---
+
+## COMMON GATE PATTERNS
+
+**Pattern 1:** Probability calculations with Bayes' theorem
+**Pattern 2:** Eigenvalue/eigenvector problems
+**Pattern 3:** Combinatorics counting problems
+**Pattern 4:** Matrix operations and determinants
+**Pattern 5:** Distribution properties and CDF/PDF
+**Pattern 6:** Calculus optimization problems
+**Pattern 7:** Set theory and relations
+
+---
+
+## FORMULAS TO MEMORIZE
+
+**Variance:** Var(X) = E[X²] - (E[X])²
+**Covariance:** Cov(X,Y) = E[XY] - E[X]E[Y]
+**Correlation:** ρ = Cov(X,Y)/(σ_X σ_Y)
+
+**Taylor Series:** f(x) = Σ f^(n)(a)(x-a)^n/n!
+**L'Hôpital's Rule:** lim(x→a) f(x)/g(x) = lim(x→a) f'(x)/g'(x)
+
+---
+
+**Print this reference sheet for exam day!**
